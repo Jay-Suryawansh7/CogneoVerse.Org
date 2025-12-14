@@ -32,6 +32,49 @@ export function Navigation() {
     setIsScrolled(latest > 50);
   });
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = navLinks.map(link => {
+        const id = link.href.substring(1);
+        const element = document.getElementById(id);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          // Check if the top of the section is near the top of the viewport
+          // or if the section covers a significant portion of the viewport
+          return { 
+            id: link.label, 
+            offset: Math.abs(rect.top),
+            visible: rect.top < window.innerHeight / 2 && rect.bottom > window.innerHeight / 2
+          };
+        }
+        return null;
+      }).filter(Boolean);
+
+      // 1. Prioritize section that is currently crossing the center of the screen
+      const visibleSection = sections.find(s => s?.visible);
+      
+      if (visibleSection) {
+        setActiveTab(visibleSection.id);
+        return;
+      }
+
+      // 2. Fallback to the one closest to the top if none are "centered"
+      // (e.g. at the very top or bottom of page)
+      if (sections.length > 0) {
+        const sorted = sections.sort((a, b) => (a?.offset || 0) - (b?.offset || 0));
+        if (sorted[0]) {
+             setActiveTab(sorted[0].id);
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    // Trigger once on mount to set initial state
+    handleScroll();
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <motion.nav
       className={cn(
