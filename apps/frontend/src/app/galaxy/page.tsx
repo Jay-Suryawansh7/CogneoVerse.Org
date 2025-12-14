@@ -12,7 +12,7 @@ import { BackgroundBeams } from "@/components/ui/background-beams";
 
 export default function GalaxyPage() {
   return (
-    <main className="bg-background min-h-screen relative w-full overflow-hidden">
+    <main className="bg-background min-h-screen relative w-full">
       <BackgroundBeams className="fixed inset-0 z-0 pointer-events-none" />
       <div className="relative z-10">
         <Navigation />
