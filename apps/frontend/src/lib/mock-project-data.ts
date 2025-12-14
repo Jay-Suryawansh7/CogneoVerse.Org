@@ -112,13 +112,13 @@ function generateMockPreviews(slug: string): PreviewMedia[] {
   return [
     {
       type: "image",
-      url: `https://placehold.co/1200x675/1a1a2e/7f5af0?text=${slug}+Dashboard`,
+      url: `/coming-soon.svg`,
       caption: "Main dashboard interface with analytics",
       alt: "Dashboard preview",
     },
     {
       type: "image",
-      url: `https://placehold.co/1200x675/16213e/0f3460?text=${slug}+Workspace`,
+      url: `/coming-soon.svg`,
       caption: "Collaborative workspace view",
       alt: "Workspace preview",
     },
@@ -276,7 +276,7 @@ function generateMockRelatedProjects(currentId: number): RelatedProject[] {
       slug: "datasync-platform",
       summary: "Real-time data synchronization across distributed systems",
       status: "active",
-      thumbnail: "https://placehold.co/600x400/1a1a2e/7f5af0?text=DataSync",
+      thumbnail: "/coming-soon.svg",
     },
     {
       id: 102,
@@ -284,7 +284,7 @@ function generateMockRelatedProjects(currentId: number): RelatedProject[] {
       slug: "cloud-analytics",
       summary: "Comprehensive analytics and business intelligence platform",
       status: "building",
-      thumbnail: "https://placehold.co/600x400/16213e/0f3460?text=Analytics",
+      thumbnail: "/coming-soon.svg",
     },
     {
       id: 103,
@@ -292,7 +292,7 @@ function generateMockRelatedProjects(currentId: number): RelatedProject[] {
       slug: "secure-vault",
       summary: "Enterprise-grade secrets and credentials management",
       status: "live",
-      thumbnail: "https://placehold.co/600x400/0d1b2a/1e91d6?text=SecureVault",
+      thumbnail: "/coming-soon.svg",
     },
   ];
   
