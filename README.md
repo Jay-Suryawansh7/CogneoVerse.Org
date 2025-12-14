@@ -1,16 +1,16 @@
-# Cogneoverse.org
+# CogneoVerse.Org
 
-Enterprise-grade, CMS-driven organizational website with public frontend, admin dashboard, and Django + PostgreSQL backend.
+Enterprise-grade, CMS-driven organizational website with a public frontend, powerful admin dashboard, and a robust Node.js + PostgreSQL backend.
 
 ## 📁 Project Structure
 
 ```
 cogneoverse/
 ├── apps/
-│   ├── frontend/        # Next.js public website
-│   ├── dashboard/       # Next.js admin CMS
-│   └── shared/          # Shared types and utilities
-├── backend/             # Django REST API
+│   ├── frontend/        # Next.js 15 public website (App Router)
+│   ├── dashboard/       # Next.js 15 admin CMS (App Router)
+│   ├── backend/         # Express.js + Prisma REST API
+│   └── shared/          # Shared UI components and types
 ├── infra/               # Infrastructure config
 └── scripts/             # Utility scripts
 ```
@@ -18,9 +18,9 @@ cogneoverse/
 ## 🚀 Quick Start
 
 ### Prerequisites
-- Node.js 18+ and pnpm
-- Python 3.9+
-- PostgreSQL (NeonDB configured)
+- Node.js 18+
+- pnpm (recommended) or npm
+- PostgreSQL (or NeonDB)
 
 ### 1. Install Dependencies
 
@@ -29,115 +29,88 @@ cogneoverse/
 pnpm install
 ```
 
-**Backend:**
+### 2. Configure Environment
+
+Ensure you have `.env` files set up in each application directory:
+- `apps/backend/.env` (Database URL, Cloudinary, Clerk keys)
+- `apps/frontend/.env` (API URL, Public keys)
+- `apps/dashboard/.env` (API URL, Clerk keys)
+
+### 3. Database Setup (Prisma)
+
+Navigate to the backend and push the schema:
 ```bash
-cd backend
-python3 -m venv .venv
-source .venv/bin/activate
-pip install django djangorestframework psycopg2-binary django-cors-headers python-dotenv cloudinary requests PyJWT dj-database-url
+cd apps/backend
+npx prisma generate
+npx prisma db push
 ```
 
-### 2. Run Migrations
+### 4. Start Development Servers
 
+**Option A: Run everything (if script available)**
 ```bash
-cd backend
-source .venv/bin/activate
-python manage.py migrate
-python manage.py createsuperuser  # Optional
+./start_dev.sh
 ```
 
-### 3. Start Development Servers
+**Option B: Run individually**
 
-**Terminal 1 - Backend:**
+*Terminal 1 - Backend:*
 ```bash
-cd backend
-source .venv/bin/activate
-python manage.py runserver
+cd apps/backend
+npm run dev
 ```
 
-**Terminal 2 - Dashboard:**
+*Terminal 2 - Dashboard:*
 ```bash
 cd apps/dashboard
-pnpm dev
+npm run dev
 ```
 
-**Terminal 3 - Frontend:**
+*Terminal 3 - Frontend:*
 ```bash
 cd apps/frontend
-pnpm dev
+npm run dev
 ```
-
-### 4. Access Applications
-
-- **Backend API**: http://localhost:8000/api/
-- **Django Admin**: http://localhost:8000/admin/
-- **Dashboard**: http://localhost:3000
-- **Frontend**: http://localhost:3000 (or 3001 if dashboard is on 3000)
-
-## 🔑 Environment Variables
-
-All environment variables are already configured in `.env` files:
-
-- `backend/.env` - Database, Cloudinary, Django settings
-- `apps/dashboard/.env.local` - Clerk auth, API URL
-- `apps/frontend/.env.local` - API URL
 
 ## 🛠️ Tech Stack
 
 **Backend:**
-- Django 4.2 + Django REST Framework
-- PostgreSQL (NeonDB)
-- Cloudinary (Media storage)
-- Clerk JWT Authentication
+- **Runtime:** Node.js
+- **Framework:** Express.js
+- **Database ORM:** Prisma
+- **Database:** PostgreSQL
+- **Storage:** Cloudinary
+- **Auth:** Clerk SDK
+- **Validation:** Zod
+- **Language:** TypeScript
 
-**Frontend:**
-- Next.js 15 (App Router)
-- TypeScript
-- Tailwind CSS
-- Framer Motion, GSAP, Anime.js
-
-**Dashboard:**
-- Next.js 15 (App Router)
-- TypeScript
-- Tailwind CSS
-- Clerk Authentication
-
-## 📚 Documentation
-
-Detailed documentation for each component:
-- [Backend README](./backend/README.md)
-- [Dashboard README](./apps/dashboard/README.md)
-- [Frontend README](./apps/frontend/README.md)
+**Frontend & Dashboard:**
+- **Framework:** Next.js 15 (App Router)
+- **Styling:** Tailwind CSS
+- **Language:** TypeScript
+- **UI Components:** Shadcn/UI (implied), Custom Components
+- **Animations:** Framer Motion, GSAP
 
 ## 🎯 Features
 
 ✅ **Backend Core**
-- Department, Project, and Media models
-- RESTful API with pagination
-- Clerk JWT authentication
-- CORS configured for frontend/dashboard
+- Robust REST API structure
+- Role-based interaction
+- Media management with Cloudinary
+- Typed schema with Prisma
 
 ✅ **Dashboard**
-- Clerk authentication
-- Department CRUD operations
-- Project management
-- Responsive admin UI
+- CMS for Departments and Projects
+- Rich text editing
+- Content management workflows
+- Admin analytics
 
 ✅ **Frontend**
-- Animated homepage with hero section
-- Department and project listings
-- Dynamic routing
-- API integration
-
-## 📝 Next Steps
-
-- [ ] Implement Block Editor Component
-- [ ] Add more public pages (Academy, Media, Network)
-- [ ] Implement media upload functionality
-- [ ] Add comprehensive tests
-- [ ] Deploy to production
+- Immersive UI/UX
+- Dynamic content rendering
+- Responsive design
+- Interactive animations
 
 ## 🤝 Contributing
 
-This is an enterprise project. Please follow the coding standards and conventions established in each application.
-# CogneoVerse.Org
+Please ensure you follow the TypeScript strict mode guidelines and run linting before pushing changes.
