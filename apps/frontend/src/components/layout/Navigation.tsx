@@ -8,14 +8,13 @@ import { usePathname } from "next/navigation";
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import { cn } from "@/lib/utils";
 
-const navLinks = [
-  { href: "#explore", label: "Explore", icon: Compass },
-  { href: "#departments", label: "Departments", icon: Building2 },
-  { href: "#projects", label: "Projects", icon: Folder },
-  // { href: "#academy", label: "Academy", icon: GraduationCap },
-  // { href: "#media", label: "Media", icon: Newspaper },
-  { href: "#network", label: "Network", icon: Share2 },
-];
+  // Dynamic links logic handled in the render
+  const navLinks = [
+    { href: "#explore", label: "Explore", icon: Compass },
+    { href: "#departments", label: "Departments", icon: Building2 },
+    { href: "#projects", label: "Projects", icon: Folder },
+    { href: "#network", label: "Network", icon: Share2 },
+  ];
 
 export function Navigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -132,7 +131,7 @@ export function Navigation() {
               return (
                 <Link
                   key={link.label}
-                  href={link.href}
+                  href={isGalaxyPage ? link.href : `/galaxy${link.href}`}
                   onClick={() => setActiveTab(link.label)}
                   className={cn(
                     "relative cursor-pointer text-sm font-semibold px-4 py-2 rounded-full transition-colors",
@@ -221,7 +220,7 @@ export function Navigation() {
             {navLinks.map((link) => (
               <Link
                 key={link.href}
-                href={link.href}
+                href={isGalaxyPage ? link.href : `/galaxy${link.href}`}
                 className="block px-4 py-2 text-gray-300 hover:bg-white/10 rounded-lg transition-colors"
                 onClick={() => setMobileMenuOpen(false)}
               >
