@@ -5,6 +5,13 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
+// Patch BigInt to be JSON serializable
+// @ts-ignore
+BigInt.prototype.toJSON = function () {
+  return this.toString();
+};
+
+
 import departmentsRoutes from './modules/departments/departments.routes';
 import projectsRoutes from './modules/projects/projects.routes';
 import mediaRoutes from './modules/media/media.routes';

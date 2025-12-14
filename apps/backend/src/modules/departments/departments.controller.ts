@@ -24,7 +24,7 @@ export const getDepartments = async (req: Request, res: Response) => {
   res.json(toJSON(departments));
   } catch (err) {
     console.error('Error in getDepartments:', err);
-    res.status(500).json({ error: 'Internal Server Error' });
+    res.status(500).json({ error: 'Internal Server Error', details: err instanceof Error ? err.message : String(err) });
   }
 };
 
