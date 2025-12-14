@@ -1,4 +1,7 @@
 import { Navigation } from "@/components/layout/Navigation";
+
+export const dynamic = "force-dynamic";
+
 import { fetchAPI } from "@/lib/api";
 import { generateMockProjectData } from "@/lib/mock-project-data";
 import { notFound } from "next/navigation";

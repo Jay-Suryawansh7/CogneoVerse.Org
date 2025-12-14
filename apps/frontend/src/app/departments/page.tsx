@@ -1,4 +1,7 @@
 import { Navigation } from "@/components/layout/Navigation";
+
+export const dynamic = "force-dynamic";
+
 import { fetchAPI } from "@/lib/api";
 import Link from "next/link";
 import { Carousel, Card } from "@/components/ui/apple-cards-carousel";
@@ -70,6 +73,7 @@ export default async function DepartmentsPage() {
           borderColor: borderColor,
           stats: {
              totalProjects: dept.total_projects || 0,
+             activeProjects: (dept.total_projects || 0) - (dept.completed_projects || 0),
              completedProjects: dept.completed_projects || 0,
              drafts: dept.drafts || 0,
              teamSize: dept.team_size || 0,

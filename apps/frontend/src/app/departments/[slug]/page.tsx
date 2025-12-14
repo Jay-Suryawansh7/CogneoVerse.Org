@@ -1,4 +1,7 @@
 import { Navigation } from "@/components/layout/Navigation";
+
+export const dynamic = "force-dynamic";
+
 import { fetchAPI } from "@/lib/api";
 import { notFound } from "next/navigation";
 import Link from "next/link";
