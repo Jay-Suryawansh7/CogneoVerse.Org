@@ -5,7 +5,6 @@ import slugify from 'slugify';
 
 // List
 export const getDepartments = async (req: Request, res: Response) => {
-  console.log('GET /departments hit');
   try {
     const departments = await prisma.departments_department.findMany({
       where: { published: true },
@@ -23,19 +22,17 @@ export const getDepartments = async (req: Request, res: Response) => {
     });
 
     const enhancedDepartments = departments.map(dept => {
-      const projects = dept.projects_project_related_departments.map(r => r.projects_project);
+      const projects = dept.projects_project_related_departments
+        .map(r => r.projects_project)
+        .filter(p => p !== null);
+        
       const total_projects = projects.length;
       const completed_projects = projects.filter(p => p.status === 'completed').length;
       const drafts = projects.filter(p => p.status === 'planned' || p.status === 'draft').length;
-      // Active = everything else? Or specifically 'active' + 'building'?
-      // Let's assume active is total - completed - drafts for simplicity or count specifically.
-      // Usually active is explicitly 'active' or 'in-progress'.
       const active_projects = projects.filter(p => ['active', 'in-progress', 'building'].includes(p.status)).length;
       
-      const team_size = Array.isArray(dept.team) ? dept.team.length : 0;
+      const team_size = Array.isArray(dept.team) ? (dept.team as any[]).length : 0;
 
-      // Remove the heavy relation object before sending, but keep the IDs? 
-      // Actually we just want the stats.
       const { projects_project_related_departments, ...rest } = dept;
 
       return {
@@ -81,7 +78,9 @@ export const getDepartment = async (req: Request, res: Response) => {
     return res.status(404).json({ error: 'Department not found' });
   }
 
-  const projects = department.projects_project_related_departments.map(r => r.projects_project);
+  const projects = department.projects_project_related_departments
+    .map(r => r.projects_project)
+    .filter(p => p !== null);
 
   const enhancedDepartment = {
       ...department,
@@ -168,6 +167,11 @@ export const deleteDepartment = async (req: Request, res: Response) => {
     });
 
     if (!department) return res.status(404).json({error: "Not found"});
+
+    // Delete relations first to avoid orphans
+    await prisma.projects_project_related_departments.deleteMany({
+      where: { department_id: department.id },
+    });
 
     await prisma.departments_department.delete({
       where: { id: department.id },

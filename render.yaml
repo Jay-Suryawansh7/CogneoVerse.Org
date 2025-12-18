@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: cogneoverse-backend
+    env: node
+    rootDir: .
+    buildCommand: cd apps/backend && npm install && npm run build
+    startCommand: cd apps/backend && npm start
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: CLOUDINARY_CLOUD_NAME
+        sync: false
+      - key: CLOUDINARY_API_KEY
+        sync: false
+      - key: CLOUDINARY_API_SECRET
+        sync: false
+      - key: CLERK_PUBLISHABLE_KEY
+        sync: false
+      - key: CLERK_SECRET_KEY
+        sync: false
+      - key: CORS_ALLOWED_ORIGINS
+        value: https://cogneoverse-frontend.vercel.app,https://cogneoverse-dashboard.vercel.app
+        sync: false
+      - key: PORT
+        value: 3001

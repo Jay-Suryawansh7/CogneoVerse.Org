@@ -32,7 +32,9 @@ export const getProjects = async (req: Request, res: Response) => {
   
   const refinedProjects = projects.map(p => ({
     ...p,
-    related_departments: p.projects_project_related_departments.map(r => r.departments_department)
+    related_departments: p.projects_project_related_departments
+      .map(r => r.departments_department)
+      .filter(d => d !== null)
   }));
 
   res.json(toJSON(refinedProjects));
@@ -57,7 +59,9 @@ export const getProject = async (req: Request, res: Response) => {
 
   const refinedProject = {
     ...project,
-    related_departments: project.projects_project_related_departments.map(r => r.departments_department)
+    related_departments: project.projects_project_related_departments
+      .map(r => r.departments_department)
+      .filter(d => d !== null)
   };
 
   res.json(toJSON(refinedProject));

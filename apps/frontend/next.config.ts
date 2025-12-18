@@ -15,10 +15,8 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  experimental: {
-    turbopack: {
-      root: path.join(__dirname, '.'),
-    },
+  turbopack: {
+    root: path.join(__dirname, '../..'),
   },
 };
 

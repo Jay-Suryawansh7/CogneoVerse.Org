@@ -1,7 +1,5 @@
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"; // I need to create this or use a placeholder
-// Since I haven't installed shadcn/ui components yet, I'll use simple divs for now or create a basic Card component.
-// I'll create a basic Card component in `src/components/ui/card.tsx` quickly to avoid errors.
+// Basic dashboard page
 
 export default function Home() {
   return (

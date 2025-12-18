@@ -65,55 +65,53 @@ export default function ProjectEditPage() {
   const [deleting, setDeleting] = useState(false);
 
 
-  useEffect(() => {
-    async function loadDepartments() {
-      try {
-        const token = await getToken();
-        const data = await fetchWithAuth("/departments/", token);
-        setDepartments(data.results || data);
-      } catch (error) {
-        console.error("Failed to load departments", error);
-      }
-    }
-    loadDepartments();
-  }, [getToken]);
 
   useEffect(() => {
-    if (isNew) return;
-
     async function loadData() {
       try {
         const token = await getToken();
-        const data = await fetchWithAuth(`/projects/${slug}/`, token);
-        setFormData({
-          title: data.title,
-          summary: data.summary,
-          status: data.status,
-          tags: (data.tags || []).join(", "),
-          department_ids: (data.related_departments || []).map((d: any) => d.id),
-          images: data.images || [],
-          blocks: data.blocks || [],
-          // New fields
-          tagline: data.tagline || "",
-          primary_cta: data.primary_cta || { label: "", href: "", variant: "primary", external: false, prefetch: false },
-          secondary_cta: data.secondary_cta || { label: "", href: "", variant: "secondary", external: false, prefetch: false },
-          about: data.about || { problem: "", solution: "", impact: "" },
-          features: data.features || [],
-          previews: data.previews || [],
-          technical_specs: data.technical_specs || [],
-          use_cases: data.use_cases || [],
-          team: data.team || [],
-          roadmap: data.roadmap || [],
-          related_projects_data: data.related_projects_data || [],
-          platform_metadata: {
-            platforms: data.platform_metadata?.platforms || [],
-            compatibility: data.platform_metadata?.compatibility || [],
-            license: data.platform_metadata?.license || "",
-            repository: data.platform_metadata?.repository || ""
-          },
-        });
+        
+        // Parallel fetching of departments and project data
+        const [deptData, projectData] = await Promise.all([
+          fetchWithAuth("/departments/", token),
+          isNew ? Promise.resolve(null) : fetchWithAuth(`/projects/${slug}/`, token)
+        ]);
+
+        if (deptData) {
+          setDepartments(deptData.results || deptData);
+        }
+
+        if (projectData) {
+          const data = projectData;
+          setFormData({
+            title: data.title,
+            summary: data.summary,
+            status: data.status,
+            tags: (data.tags || []).join(", "),
+            department_ids: (data.related_departments || []).map((d: any) => d.id),
+            images: data.images || [],
+            blocks: data.blocks || [],
+            tagline: data.tagline || "",
+            primary_cta: data.primary_cta || { label: "", href: "", variant: "primary", external: false, prefetch: false },
+            secondary_cta: data.secondary_cta || { label: "", href: "", variant: "secondary", external: false, prefetch: false },
+            about: data.about || { problem: "", solution: "", impact: "" },
+            features: data.features || [],
+            previews: data.previews || [],
+            technical_specs: data.technical_specs || [],
+            use_cases: data.use_cases || [],
+            team: data.team || [],
+            roadmap: data.roadmap || [],
+            related_projects_data: data.related_projects_data || [],
+            platform_metadata: {
+              platforms: data.platform_metadata?.platforms || [],
+              compatibility: data.platform_metadata?.compatibility || [],
+              license: data.platform_metadata?.license || "",
+              repository: data.platform_metadata?.repository || ""
+            },
+          });
+        }
       } catch (error) {
-        console.error("Failed to load project", error);
+        console.error("Failed to load project data", error);
       } finally {
         setLoading(false);
       }
