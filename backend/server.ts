@@ -12,9 +12,9 @@ BigInt.prototype.toJSON = function () {
 };
 
 
-import departmentsRoutes from './modules/departments/departments.routes';
-import projectsRoutes from './modules/projects/projects.routes';
-import mediaRoutes from './modules/media/media.routes';
+import departmentsRoutes from './src/modules/departments/departments.routes';
+import projectsRoutes from './src/modules/projects/projects.routes';
+import mediaRoutes from './src/modules/media/media.routes';
 
 const app = express();
 const PORT = process.env.PORT || 3001;
