@@ -21,15 +21,15 @@ export const getDepartments = async (req: Request, res: Response) => {
       }
     });
 
-    const enhancedDepartments = departments.map(dept => {
+    const enhancedDepartments = departments.map((dept) => {
       const projects = dept.projects_project_related_departments
-        .map(r => r.projects_project)
-        .filter(p => p !== null);
+        .map((r: { projects_project: { status: string } | null }) => r.projects_project)
+        .filter((p): p is { status: string } => p !== null);
         
       const total_projects = projects.length;
-      const completed_projects = projects.filter(p => p.status === 'completed').length;
-      const drafts = projects.filter(p => p.status === 'planned' || p.status === 'draft').length;
-      const active_projects = projects.filter(p => ['active', 'in-progress', 'building'].includes(p.status)).length;
+      const completed_projects = projects.filter((p: { status: string }) => p.status === 'completed').length;
+      const drafts = projects.filter((p: { status: string }) => p.status === 'planned' || p.status === 'draft').length;
+      const active_projects = projects.filter((p: { status: string }) => ['active', 'in-progress', 'building'].includes(p.status)).length;
       
       const team_size = Array.isArray(dept.team) ? (dept.team as any[]).length : 0;
 
@@ -79,16 +79,16 @@ export const getDepartment = async (req: Request, res: Response) => {
   }
 
   const projects = department.projects_project_related_departments
-    .map(r => r.projects_project)
-    .filter(p => p !== null);
+    .map((r: { projects_project: { id: bigint; title: string; slug: string; summary: string; status: string; tags: unknown } | null }) => r.projects_project)
+    .filter((p): p is { id: bigint; title: string; slug: string; summary: string; status: string; tags: unknown } => p !== null);
 
   const enhancedDepartment = {
       ...department,
       projects, // Include full projects list for details page
       total_projects: projects.length,
-      completed_projects: projects.filter(p => p.status === 'completed').length,
-      drafts: projects.filter(p => p.status === 'planned' || p.status === 'draft').length,
-      active_projects: projects.filter(p => ['active', 'in-progress', 'building'].includes(p.status)).length,
+      completed_projects: projects.filter((p: { status: string }) => p.status === 'completed').length,
+      drafts: projects.filter((p: { status: string }) => p.status === 'planned' || p.status === 'draft').length,
+      active_projects: projects.filter((p: { status: string }) => ['active', 'in-progress', 'building'].includes(p.status)).length,
       team_size: Array.isArray(department.team) ? department.team.length : 0
   };
 

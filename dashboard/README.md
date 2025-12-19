@@ -13,7 +13,7 @@ Admin dashboard for managing Cogneoverse content.
 
 1. **Install Dependencies**
 ```bash
-cd apps/dashboard
+cd dashboard
 pnpm install
 ```
 

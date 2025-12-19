@@ -25,7 +25,7 @@ export const createMedia = async (req: Request, res: Response) => {
                 file: file.filename, // Store public_id or filename
                 url: file.path,      // Store full Cloudinary URL
                 body: body.body || '',
-                author: req.auth?.userId || 'unknown', // Clerk ID
+                author: 'anonymous', // Auth disabled
                 published_at: new Date(),
                 hero: body.hero === 'true',
                 created_at: new Date(),

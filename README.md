@@ -6,69 +6,65 @@ Enterprise-grade, CMS-driven organizational website with a public frontend, powe
 
 ```
 cogneoverse/
-├── apps/
-│   ├── frontend/        # Next.js 15 public website (App Router)
-│   ├── dashboard/       # Next.js 15 admin CMS (App Router)
-│   ├── backend/         # Express.js + Prisma REST API
-│   └── shared/          # Shared UI components and types
-├── infra/               # Infrastructure config
-└── scripts/             # Utility scripts
+├── frontend/        # Next.js 15 public website (App Router)
+├── dashboard/       # Next.js 15 admin CMS (App Router)
+├── backend/         # Express.js + Prisma REST API
+├── shared/          # Shared UI components and types
+└── render.yaml      # Render deployment config
 ```
 
 ## 🚀 Quick Start
 
 ### Prerequisites
 - Node.js 18+
-- pnpm (recommended) or npm
+- npm
 - PostgreSQL (or NeonDB)
 
 ### 1. Install Dependencies
 
-**Root:**
+Each project has its own dependencies. Install them separately:
+
 ```bash
-pnpm install
+cd backend && npm install
+cd frontend && npm install
+cd dashboard && npm install
 ```
 
 ### 2. Configure Environment
 
 Ensure you have `.env` files set up in each application directory:
-- `apps/backend/.env` (Database URL, Cloudinary, Clerk keys)
-- `apps/frontend/.env` (API URL, Public keys)
-- `apps/dashboard/.env` (API URL, Clerk keys)
+- `backend/.env` (Database URL, Cloudinary, Clerk keys)
+- `frontend/.env.local` (API URL, Public keys)
+- `dashboard/.env.local` (API URL, Clerk keys)
 
 ### 3. Database Setup (Prisma)
 
 Navigate to the backend and push the schema:
 ```bash
-cd apps/backend
+cd backend
 npx prisma generate
 npx prisma db push
 ```
 
 ### 4. Start Development Servers
 
-**Option A: Run everything (if script available)**
-```bash
-./start_dev.sh
-```
-
-**Option B: Run individually**
+Run each in a separate terminal:
 
 *Terminal 1 - Backend:*
 ```bash
-cd apps/backend
+cd backend
 npm run dev
 ```
 
-*Terminal 2 - Dashboard:*
+*Terminal 2 - Frontend:*
 ```bash
-cd apps/dashboard
+cd frontend
 npm run dev
 ```
 
-*Terminal 3 - Frontend:*
+*Terminal 3 - Dashboard:*
 ```bash
-cd apps/frontend
+cd dashboard
 npm run dev
 ```
 

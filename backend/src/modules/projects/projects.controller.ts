@@ -30,11 +30,11 @@ export const getProjects = async (req: Request, res: Response) => {
     orderBy: { created_at: 'desc' }
   });
   
-  const refinedProjects = projects.map(p => ({
+  const refinedProjects = projects.map((p) => ({
     ...p,
     related_departments: p.projects_project_related_departments
-      .map(r => r.departments_department)
-      .filter(d => d !== null)
+      .map((r: { departments_department: { id: bigint; title: string; slug: string } | null }) => r.departments_department)
+      .filter((d): d is { id: bigint; title: string; slug: string } => d !== null)
   }));
 
   res.json(toJSON(refinedProjects));
@@ -60,8 +60,8 @@ export const getProject = async (req: Request, res: Response) => {
   const refinedProject = {
     ...project,
     related_departments: project.projects_project_related_departments
-      .map(r => r.departments_department)
-      .filter(d => d !== null)
+      .map((r: { departments_department: unknown }) => r.departments_department)
+      .filter((d): d is NonNullable<typeof d> => d !== null)
   };
 
   res.json(toJSON(refinedProject));
@@ -136,7 +136,7 @@ export const createProject = async (req: Request, res: Response) => {
     });
 
     res.status(201).json(toJSON(createdProject));
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error(error);
     res.status(500).json({ error: 'Failed to create project', details: error instanceof Error ? error.message : String(error) });
   }

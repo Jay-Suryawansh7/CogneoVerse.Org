@@ -15,7 +15,7 @@ Public-facing website for Cogneoverse.org.
 
 1. **Install Dependencies**
 ```bash
-cd apps/frontend
+cd frontend
 pnpm install
 ```
 

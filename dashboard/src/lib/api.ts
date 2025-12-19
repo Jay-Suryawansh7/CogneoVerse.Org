@@ -1,15 +1,12 @@
-import { useAuth } from "@clerk/nextjs";
-
+// Auth disabled for now
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000/api";
 
-export async function fetchWithAuth(url: string, token: string | null, options: RequestInit = {}) {
+export async function fetchWithAuth(url: string, _token?: string | null, options: RequestInit = {}) {
   try {
     console.log(`[Dashboard API] Fetching: ${API_URL}${url}`);
-    console.log(`[Dashboard API] Auth token present: ${!!token}`);
     
     const headers = {
       "Content-Type": "application/json",
-      ...(token ? { Authorization: `Bearer ${token}` } : {}),
       ...options.headers,
     };
 
@@ -33,7 +30,7 @@ export async function fetchWithAuth(url: string, token: string | null, options: 
     return data;
   } catch (error) {
     console.error(`[Dashboard API] Fetch failed for ${url}:`, error);
-    // Return empty array/object instead of throwing to prevent page crashes
     return { results: [], data: [] };
   }
 }
+

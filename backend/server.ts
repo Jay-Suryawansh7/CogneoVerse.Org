@@ -1,9 +1,7 @@
+import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
-import dotenv from 'dotenv';
-
-dotenv.config();
 
 // Patch BigInt to be JSON serializable
 // @ts-ignore
@@ -36,6 +34,11 @@ app.use('/api/media', mediaRoutes);
 // Health Check
 app.get('/api/health', (req, res) => {
     res.json({ status: 'ok', timestamp: new Date() });
+});
+
+// 404 Handler
+app.use((req, res) => {
+    res.status(404).json({ error: 'Not Found' });
 });
 
 // Error handling
