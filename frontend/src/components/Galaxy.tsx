@@ -1,4 +1,4 @@
-import { Renderer, Program, Mesh, Color, Triangle } from 'ogl';
+import { Renderer, Program, Mesh, Color as OGLColor, Triangle } from 'ogl';
 import { useEffect, useRef } from 'react';
 
 const vertexShader = `
@@ -235,7 +235,7 @@ export default function Galaxy({
       const scale = 1;
       renderer.setSize(ctn.offsetWidth * scale, ctn.offsetHeight * scale);
       if (program) {
-        program.uniforms.uResolution.value = new Color(
+        program.uniforms.uResolution.value = new OGLColor(
           gl.canvas.width,
           gl.canvas.height,
           gl.canvas.width / gl.canvas.height
@@ -252,7 +252,7 @@ export default function Galaxy({
       uniforms: {
         uTime: { value: 0 },
         uResolution: {
-          value: new Color(gl.canvas.width, gl.canvas.height, gl.canvas.width / gl.canvas.height)
+          value: new OGLColor(gl.canvas.width, gl.canvas.height, gl.canvas.width / gl.canvas.height)
         },
         uFocal: { value: new Float32Array(focal) },
         uRotation: { value: new Float32Array(rotation) },
