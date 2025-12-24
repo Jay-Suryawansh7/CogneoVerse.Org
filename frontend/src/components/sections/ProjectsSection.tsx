@@ -29,7 +29,7 @@ export async function ProjectsSection() {
             Our Projects
           </h2>
           <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-            Discover the innovative projects we're working on
+            Discover the innovative projects we&apos;re working on
           </p>
         </div>
       </ScrollAnimation>

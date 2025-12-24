@@ -33,7 +33,7 @@ export default async function ProjectsPage() {
             Our Projects
           </h1>
           <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-            Discover the innovative projects we're working on
+          Discover the innovative projects we&apos;re working on
           </p>
         </div>
 

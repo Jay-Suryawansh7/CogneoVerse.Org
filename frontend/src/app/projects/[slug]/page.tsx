@@ -7,7 +7,7 @@ import { generateMockProjectData } from "@/lib/mock-project-data";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ChevronLeft, ExternalLink, Github } from "lucide-react";
-import { Separator } from "@/components/ui/separator";
+
 
 // Components
 import { StatusBadge } from "@/components/project/status-badge";
@@ -24,7 +24,7 @@ import { StickyUtilityBar } from "@/components/project/sticky-utility-bar";
 
 export default async function ProjectPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  let baseProject: any = null;
+  let baseProject: unknown = null;
 
   try {
     baseProject = await fetchAPI(`/projects/${slug}/`);
@@ -32,7 +32,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
     if (!baseProject) {
       notFound();
     }
-  } catch (error) {
+  } catch {
     notFound();
   }
 

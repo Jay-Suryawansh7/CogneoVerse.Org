@@ -41,7 +41,7 @@ export function StickyUtilityBar({
           title: projectTitle,
           url: window.location.href,
         });
-      } catch (err) {
+      } catch {
         // User cancelled or error occurred
       }
     } else {
@@ -49,7 +49,7 @@ export function StickyUtilityBar({
       try {
         await navigator.clipboard.writeText(window.location.href);
         toast.success('Link copied to clipboard!');
-      } catch (err) {
+      } catch {
         toast.error('Failed to copy link');
       }
     }

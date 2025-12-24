@@ -5,6 +5,7 @@ import type { ProjectData, Feature, TechSpec, TeamMember, RoadmapMilestone, UseC
  * Use this to extend existing API data with new fields until backend is updated
  */
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function generateMockProjectData(baseProject: any): ProjectData {
   return {
     // Map existing API fields

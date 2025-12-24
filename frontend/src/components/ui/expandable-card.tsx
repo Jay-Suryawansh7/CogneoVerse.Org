@@ -125,7 +125,7 @@ export default function ExpandableGalaxyCard() {
         ) : null}
       </AnimatePresence>
       <ul className="max-w-2xl mx-auto w-full gap-4 flex justify-center">
-        {cards.map((card, index) => (
+        {cards.map((card) => (
           <motion.div
             layoutId={`card-${card.title}-${id}`}
             key={`card-${card.title}-${id}`}
@@ -216,7 +216,7 @@ const cards = [
           Welcome to Cogneoverse. <br /> <br />
           Join our network of organizational excellence. Sign in to access your dashboard, manage projects, and connect with departments.
           <br /><br />
-          <Link href="/sign-up" className="text-blue-400 hover:text-blue-300 underline">Don't have an account? Sign up here.</Link>
+          <Link href="/sign-up" className="text-blue-400 hover:text-blue-300 underline">Don&apos;t have an account? Sign up here.</Link>
         </p>
       );
     },

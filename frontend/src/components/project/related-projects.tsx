@@ -47,6 +47,7 @@ export function RelatedProjects({ projects, className }: RelatedProjectsProps) {
                   
                   {/* Status badge overlay */}
                   <div className="absolute right-3 top-3">
+                    {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                     <StatusBadge status={project.status as any} size="sm" />
                   </div>
                 </div>
@@ -63,7 +64,8 @@ export function RelatedProjects({ projects, className }: RelatedProjectsProps) {
 
                 {!project.thumbnail && (
                   <div className="mb-3">
-                    <StatusBadge status={project.status as any} size="sm" />
+                  {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+                  <StatusBadge status={project.status as any} size="sm" />
                   </div>
                 )}
 

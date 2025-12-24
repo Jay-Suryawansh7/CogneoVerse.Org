@@ -14,6 +14,7 @@ interface UseCaseCardProps {
 
 export function UseCaseCard({ useCase, index = 0, className }: UseCaseCardProps) {
   const IconComponent = useCase.icon
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     ? (Icons as any)[useCase.icon] || Icons.Target
     : Icons.Target;
 

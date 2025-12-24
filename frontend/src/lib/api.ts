@@ -18,7 +18,7 @@ export async function fetchAPI(endpoint: string) {
       try {
         const errData = await response.json();
         errorDetail = JSON.stringify(errData);
-      } catch (e) {
+      } catch {
         errorDetail = await response.text();
       }
       console.error(`[API ERROR] ${response.status} for ${endpoint}: ${errorDetail}`);

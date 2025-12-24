@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Menu, X, LayoutDashboard, Compass, Building2, Folder, Share2, GraduationCap, Newspaper } from "lucide-react";
+import { Menu, X, LayoutDashboard, Compass, Building2, Folder, Share2 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { UserButton, useUser } from "@clerk/nextjs";
 import { usePathname } from "next/navigation";

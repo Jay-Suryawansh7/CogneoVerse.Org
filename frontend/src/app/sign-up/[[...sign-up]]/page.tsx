@@ -95,9 +95,9 @@ export default function SignUpPage() {
         />
         <div className="mt-6 text-center text-sm text-gray-400">
           Already have an account?{" "}
-          <a href="/sign-in" className="text-purple-400 hover:text-purple-300 font-medium">
+          <Link href="/sign-in" className="text-purple-400 hover:text-purple-300 font-medium">
             Sign in
-          </a>
+          </Link>
         </div>
       </MagicCard>
     </div>

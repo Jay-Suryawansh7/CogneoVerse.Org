@@ -125,8 +125,10 @@ export interface ProjectData {
   platformMetadata?: PlatformMetadata;
   
   // Legacy fields (keep for backward compatibility)
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   blocks?: any[];
   images?: string[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   related_departments?: any[];
 }
 

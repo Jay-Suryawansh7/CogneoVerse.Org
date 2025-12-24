@@ -2,8 +2,6 @@ import { Navigation } from "@/components/layout/Navigation";
 import { ExploreSection } from "@/components/sections/ExploreSection";
 import { ProjectsSection } from "@/components/sections/ProjectsSection";
 import { DepartmentsSection } from "@/components/sections/DepartmentsSection";
-import { AcademySection } from "@/components/sections/AcademySection";
-import { MediaSection } from "@/components/sections/MediaSection";
 import { DepartmentLeadsSection } from "@/components/sections/DepartmentLeadsSection";
 import { NetworkSection } from "@/components/sections/NetworkSection";
 import { Footer } from "@/components/layout/Footer";

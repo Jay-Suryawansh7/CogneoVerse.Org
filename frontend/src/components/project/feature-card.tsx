@@ -13,7 +13,7 @@ interface FeatureCardProps {
 }
 
 export function FeatureCard({ feature, index = 0, className }: FeatureCardProps) {
-  // Dynamically get icon from lucide-react
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const IconComponent = (Icons as any)[feature.icon] || Icons.Sparkles;
 
   return (

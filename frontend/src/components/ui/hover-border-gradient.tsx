@@ -16,11 +16,13 @@ export function HoverBorderGradient({
   ...props
 }: React.PropsWithChildren<
   {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     as?: any;
     containerClassName?: string;
     className?: string;
     duration?: number;
     clockwise?: boolean;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } & React.HTMLAttributes<HTMLElement> & { [key: string]: any }
 >) {
   const [hovered, setHovered] = useState<boolean>(false);
@@ -70,11 +72,11 @@ export function HoverBorderGradient({
       }, duration * 1000);
       return () => clearInterval(interval);
     }
-  }, [hovered, isVisible, duration]);
+  }, [hovered, isVisible, duration, rotateDirection]);
   return (
     <Tag
       ref={containerRef}
-      onMouseEnter={(event: React.MouseEvent<HTMLDivElement>) => {
+      onMouseEnter={() => {
         setHovered(true);
       }}
       onMouseLeave={() => setHovered(false)}

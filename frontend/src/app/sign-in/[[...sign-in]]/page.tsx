@@ -106,10 +106,10 @@ export default function SignInPage() {
           forceRedirectUrl="/"
         />
         <div className="mt-6 text-center text-sm text-gray-400">
-          Don't have an account?{" "}
-          <a href="/sign-up" className="text-purple-400 hover:text-purple-300 font-medium">
+          Don&apos;t have an account?{" "}
+          <Link href="/sign-up" className="text-purple-400 hover:text-purple-300 font-medium">
             Sign up
-          </a>
+          </Link>
         </div>
       </MagicCard>
     </div>
